@@ -10,7 +10,6 @@
 #define LOG_LVL     LOG_LVL_INFO
 #include <ulog.h>
 
-static int LeakageDetection();
 uint8_t ComputeCheckSum(const uint8_t *data, size_t len);
 uint32_t AngleToPulse(float angle_deg);
 void SetPulseBytes(uint8_t* data, int32_t pulse);
@@ -90,20 +89,6 @@ void EquipmentThreadEntry(void* parameter){
         #endif
         rt_thread_delay(25);
     }
-}
-
-inline static int LeakageDetection() {
-    static int cnt = 0;
-    uint16_t adc = get_adc();
-    if(adc < 4000) {
-        if((++cnt) > 40) {
-            cnt = 0;
-            return 1;
-        }
-    } else {
-        if(cnt > 0) cnt--;
-    }
-    return 0;
 }
 
 // 计算校验和

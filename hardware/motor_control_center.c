@@ -10,6 +10,9 @@
 #define LOG_LVL LOG_LVL_INFO
 #include <ulog.h>
 
+
+//  todo:构建一个BDC结构体存储每个电机的运动状态
+
 struct motor_msg rx_motor_msg[10];
 struct motor_msg* get_rx_motor_msg(){
 	return rx_motor_msg;

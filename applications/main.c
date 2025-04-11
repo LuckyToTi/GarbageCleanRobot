@@ -53,6 +53,7 @@
 #include "yesens_thread.h"
 #include "fid_ahrs_thread.h"
 #include "hi12h4_ahrs_thread.h"
+#include "motor_test_thread.h"
 #include "config.h"
 
 // user / userlib head(.h)
@@ -155,6 +156,7 @@ void TasksInit()
     *get_rov_move_tid() = rt_thread_create("rov", RovThreadEntry, (void*)0, 2048 + 1024, 10, 10);
     *get_equipment_tid() = rt_thread_create("equip...", EquipmentThreadEntry, (void*)0, 1024 + 1024, 10, 10);
     *get_dvl_json_tcp_tid() = rt_thread_create("dvl_t", DvlJsonTcpThreadEntry, (void*)0, 2048, 10, 10);
+    *get_motor_test_tid() = rt_thread_create("motor_test_t", MotorTestThreadEntry, (void*)0, 1024+512, 10, 10);
 }
 
 void TasksConfigInit()
@@ -221,6 +223,7 @@ void TaskStart()
     if (*get_yesens_tid() != RT_NULL) rt_thread_startup(*get_yesens_tid());
     if (*get_fid_ahrs_tid() != RT_NULL) rt_thread_startup(*get_fid_ahrs_tid());
     if (*get_hi12h4_ahrs_tid() != RT_NULL) rt_thread_startup(*get_hi12h4_ahrs_tid());
+    if (*get_motor_test_tid() != RT_NULL) rt_thread_startup(*get_motor_test_tid());
 }
 
 void StartTelnetServer(void) {

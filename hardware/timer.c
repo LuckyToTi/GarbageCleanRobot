@@ -154,5 +154,5 @@ void TimerInit()
 {
     Tim4Init();
     Tim1Init();
-    Tim9_Tim3Init();
+//    Tim9_Tim3Init();
 }
